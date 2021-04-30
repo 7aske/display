@@ -31,9 +31,10 @@ fi
 while true; do
 	if [ -z "$cmd" ]; then
 		CPU="$($LCL_BIN/cpu)"
-		TEMP="$($LCL_BIN/temp | cut -c 1-5)"
 		MEM="$($LCL_BIN/memory)"
-		DATA="$(printf "CPU: %4s %5sC\nMEM: %11s" $CPU $TEMP $MEM)"
+		BAND="$($LCL_BIN/bandwidth -f "%5s %5s")"
+
+		DATA="$(printf "H:%4s %9s\nN:%14s" "$CPU" "$MEM" "$BAND")"
 	else
 		DATA=`eval $cmd`
 	fi
